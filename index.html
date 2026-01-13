@@ -1,0 +1,1420 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fifth Wheel Hitch Finder | Professional Selection Tool</title>
+  <meta name="description" content="Professional fifth wheel hitch selection tool for RV dealerships" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <div class="app">
+    <!-- Header -->
+    <div class="header">
+      <div class="header-icon"><img src="images/hitch.png" alt="Fifth Wheel Hitch" /></div>
+      <div class="header-text">
+        <h1>Fifth Wheel Hitch Finder</h1>
+        <p>Professional hitch selection for your customer</p>
+      </div>
+    </div>
+
+    <!-- Progress Steps -->
+    <div class="progress-bar" id="progressBar">
+      <div class="progress-step active" data-step="1">
+        <div class="step-circle"><img src="images/truck.png" alt="Truck" class="zoomable" /></div>
+        <div class="step-label">Truck</div>
+      </div>
+      <div class="progress-step" data-step="2">
+        <div class="step-circle"><img src="images/pucks.png" alt="Bed" class="zoomable" /></div>
+        <div class="step-label">Bed</div>
+      </div>
+      <div class="progress-step" data-step="3">
+        <div class="step-circle"><img src="images/CURT A16 5th Wheel Hitch in Truck Bed.png" alt="Setup" class="zoomable" /></div>
+        <div class="step-label">Setup</div>
+      </div>
+      <div class="progress-step" data-step="4">
+        <div class="step-circle"><img src="images/trailer.png" alt="Trailer" class="zoomable" /></div>
+        <div class="step-label">Trailer</div>
+      </div>
+    </div>
+
+    <div class="layout">
+      <div class="card">
+
+        <div id="step1">
+          <div class="section-title"><img src="images/truck.png" alt="" class="section-icon" /> Truck Information</div>
+          <div class="section-subtitle">Enter the customer's truck details. If anything is unknown, choose "Not sure"
+            and continue.</div>
+          <div class="divider"></div>
+
+          <div class="form-row">
+            <div>
+              <label for="make">Truck make</label>
+              <select id="make"></select>
+            </div>
+            <div>
+              <label for="model">Truck model</label>
+              <select id="model"></select>
+            </div>
+            <div>
+              <label for="year">Truck year</label>
+              <select id="year"></select>
+              <div class="hint">If you are not sure, leave it blank</div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div>
+              <label for="engine">Engine</label>
+              <select id="engine"></select>
+              <div class="hint">Captured now so tow capacity logic can be added later</div>
+            </div>
+            <div>
+              <input type="hidden" id="truckClass" value="unknown" />
+            </div>
+          </div>
+
+          <div class="controls">
+            <button id="reset1">Reset</button>
+            <button class="primary" id="to2">Next: Bed Size →</button>
+          </div>
+        </div>
+
+        <div id="step2" class="hidden">
+          <div class="section-title"><img src="images/pucks.png" alt="" class="section-icon" /> Bed Configuration</div>
+          <div class="section-subtitle">Select the truck's bed size and factory prep status.</div>
+          <div class="divider"></div>
+
+          <div class="form-row">
+            <div>
+              <label for="bedSize">Bed size</label>
+              <select id="bedSize"></select>
+            </div>
+            <div>
+              <label for="factoryPrep">Factory puck system</label>
+              <select id="factoryPrep">
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+                <option value="unknown">Not sure</option>
+              </select>
+              <div id="prepRuleMsg" class="hint"></div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div id="prepPhotoWrap" class="hidden">
+              <div class="warn">If factory prep is not sure, ask for a clear photo of the bed floor with the covers
+                open. If rails are installed, ask for a photo of the rails and any brand label.</div>
+            </div>
+          </div>
+
+          <div id="superShortMsg" class="warn hidden"></div>
+
+          <div class="controls">
+            <button id="back1">Back</button>
+            <button id="reset2">Reset</button>
+            <button class="primary" id="to3">Next: Bed Setup →</button>
+          </div>
+        </div>
+
+        <div id="step3" class="hidden">
+          <div class="section-title"><img src="images/CURT A16 5th Wheel Hitch in Truck Bed.png" alt="" class="section-icon" /> Bed Setup</div>
+          <div class="section-subtitle">What accessories are currently installed in the bed? This helps avoid clearance
+            issues.</div>
+          <div class="divider"></div>
+
+          <div class="form-row">
+            <div>
+              <label for="tonneau">Tonneau cover</label>
+              <select id="tonneau">
+                <option value="none">None</option>
+                <option value="soft">Soft roll up</option>
+                <option value="hardfold">Hard fold</option>
+                <option value="retract">Retractable</option>
+                <option value="unknown">Not sure</option>
+              </select>
+            </div>
+            <div>
+              <label for="toolbox">Toolbox</label>
+              <select id="toolbox">
+                <option value="none">None</option>
+                <option value="crossover">Crossover toolbox</option>
+                <option value="side">Side boxes</option>
+                <option value="unknown">Not sure</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div>
+              <label for="cap">Bed cap or topper</label>
+              <select id="cap">
+                <option value="no">No</option>
+                <option value="yes">Yes</option>
+                <option value="unknown">Not sure</option>
+              </select>
+            </div>
+            <div>
+              <label for="fuelTank">In bed fuel tank</label>
+              <select id="fuelTank">
+                <option value="no">No</option>
+                <option value="yes">Yes</option>
+                <option value="unknown">Not sure</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div>
+              <label for="bedLiner">Bed liner</label>
+              <select id="bedLiner">
+                <option value="none">None</option>
+                <option value="spray">Spray in</option>
+                <option value="dropin">Drop in</option>
+                <option value="unknown">Not sure</option>
+              </select>
+            </div>
+            <div>
+              <label for="otherBed">Other bed items (optional)</label>
+              <input id="otherBed" placeholder="Example rack, compressor, drawers" />
+            </div>
+          </div>
+
+          <div id="bedWarnings" class="warn hidden"></div>
+
+          <div class="controls">
+            <button id="back2">Back</button>
+            <button id="reset3">Reset</button>
+            <button class="primary" id="to4">Next: Trailer Info →</button>
+          </div>
+        </div>
+
+        <div id="step4" class="hidden">
+          <div class="section-title"><img src="images/trailer.png" alt="" class="section-icon" /> Trailer Information
+          </div>
+          <div class="section-subtitle">Trailer details help confirm slider needs and gooseneck conversion options.
+          </div>
+          <div class="divider"></div>
+
+          <div class="form-row">
+            <div>
+              <label for="gvwr">Trailer GVWR or loaded estimate (optional)</label>
+              <input id="gvwr" placeholder="Example 14000" inputmode="numeric" />
+              <div class="hint">If unknown, leave blank and keep going</div>
+            </div>
+            <div>
+              <label for="pinWeight">Estimated pin weight (optional)</label>
+              <input id="pinWeight" placeholder="Example 2500" inputmode="numeric" />
+              <div class="hint">If unknown, leave blank</div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div>
+              <label for="frontCap">Front cap designed for short bed clearance</label>
+              <select id="frontCap">
+                <option value="unknown">Not sure</option>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+              </select>
+              <div class="hint">If not sure on a short bed, stay conservative</div>
+            </div>
+            <div>
+              <label for="rotatingPinBox">Rotating style pin box</label>
+              <select id="rotatingPinBox">
+                <option value="unknown">Not sure</option>
+                <option value="no">No</option>
+                <option value="yes">Yes</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div>
+              <label for="gooseneckPref">Customer wants gooseneck style connection or wants more open bed space</label>
+              <select id="gooseneckPref">
+                <option value="no">No</option>
+                <option value="yes">Yes</option>
+                <option value="unknown">Not sure</option>
+              </select>
+            </div>
+            <div id="gooseneckApprovalWrap" class="hidden">
+              <label for="gooseneckApproval">Trailer manufacturer or pin box documents approve a gooseneck pin box
+                replacement</label>
+              <select id="gooseneckApproval">
+                <option value="unknown">Not sure</option>
+                <option value="no">No</option>
+                <option value="yes">Yes</option>
+              </select>
+              <div class="hint">Do not quote a gooseneck conversion without approval</div>
+            </div>
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="row">
+            <div>
+              <button class="primary" id="buildSummary">✨ Generate Recommendation</button>
+            </div>
+            <div style="display:flex; gap:10px; justify-content:flex-end; flex-wrap:wrap;">
+              <button id="back3">Back</button>
+              <button id="reset4">Reset</button>
+            </div>
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="row">
+            <div>
+              <div class="output" id="summaryOut"></div>
+              <div class="controls" style="justify-content:flex-start;">
+                <button id="copySummary">Copy summary</button>
+                <button id="downloadTxt">Download summary text</button>
+              </div>
+              <div id="copyMsg" class="hint"></div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+      <aside class="sidebar">
+        <h3>At a Glance</h3>
+        <div class="summary-list">
+          <div class="summary-item"><span>Year</span>
+            <div id="sumYear">—</div>
+          </div>
+          <div class="summary-item"><span>Make</span>
+            <div id="sumMake">—</div>
+          </div>
+          <div class="summary-item"><span>Model</span>
+            <div id="sumModel">—</div>
+          </div>
+          <div class="summary-item"><span>Bed Size</span>
+            <div id="sumBed">—</div>
+          </div>
+          <div class="summary-item"><span>Puck System</span>
+            <div id="sumPrep">—</div>
+          </div>
+          <div class="summary-item"><span>Engine</span>
+            <div id="sumEngine">—</div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <div class="image-modal hidden" id="imageModal" role="dialog" aria-modal="true" aria-label="Icon preview">
+    <button class="image-modal-close" id="imageModalClose" aria-label="Close preview">×</button>
+    <img id="imageModalImg" alt="" />
+  </div>
+
+  <script>
+    const $ = (id) => document.getElementById(id);
+
+    const data = {
+      makes: [
+        { value: "ford", label: "Ford" },
+        { value: "ram", label: "Ram" },
+        { value: "gmchevy", label: "GM Chevrolet" },
+        { value: "gmgmc", label: "GM GMC" },
+        { value: "toyota", label: "Toyota" },
+        { value: "nissan", label: "Nissan" },
+        { value: "other", label: "Other" }
+      ],
+      modelsByMake: {
+        ford: [
+          { value: "f150", label: "F 150" },
+          { value: "f250", label: "F 250" },
+          { value: "f350", label: "F 350" },
+          { value: "other", label: "Other" }
+        ],
+        ram: [
+          { value: "1500", label: "1500" },
+          { value: "2500", label: "2500" },
+          { value: "3500", label: "3500" },
+          { value: "other", label: "Other" }
+        ],
+        gmchevy: [
+          { value: "1500", label: "1500" },
+          { value: "2500", label: "2500" },
+          { value: "3500", label: "3500" },
+          { value: "other", label: "Other" }
+        ],
+        gmgmc: [
+          { value: "1500", label: "1500" },
+          { value: "2500", label: "2500" },
+          { value: "3500", label: "3500" },
+          { value: "other", label: "Other" }
+        ],
+        toyota: [
+          { value: "tundra", label: "Tundra" },
+          { value: "tacoma", label: "Tacoma" },
+          { value: "other", label: "Other" }
+        ],
+        nissan: [
+          { value: "titan", label: "Titan" },
+          { value: "frontier", label: "Frontier" },
+          { value: "other", label: "Other" }
+        ],
+        other: [
+          { value: "other", label: "Other" }
+        ]
+      },
+      enginesByMake: {
+        ford: ["Not sure", "2.7", "3.5", "5.0", "3.0 diesel", "6.7 diesel", "Other"],
+        ram: ["Not sure", "3.6", "5.7", "6.4", "3.0 diesel", "6.7 diesel", "Other"],
+        gm: ["Not sure", "2.7", "5.3", "6.2", "6.6 gas", "3.0 diesel", "6.6 diesel", "Other"],
+        toyota: ["Not sure", "3.4", "4.6", "5.7", "Other"],
+        nissan: ["Not sure", "5.6", "Other"],
+        other: ["Not sure", "Other"]
+      },
+      fordF150EnginesByYear: {
+        "2006": ["4.2L V6", "4.6L V8", "5.4L V8"],
+        "2007": ["4.2L V6", "4.6L V8", "5.4L V8"],
+        "2008": ["4.2L V6", "4.6L V8", "5.4L V8"],
+        "2009": ["4.6L V8", "5.4L V8"],
+        "2010": ["4.6L V8", "5.4L V8"],
+        "2011": ["3.7L V6", "5.0L V8", "3.5L EcoBoost V6", "6.2L V8"],
+        "2012": ["3.7L V6", "5.0L V8", "3.5L EcoBoost V6", "6.2L V8"],
+        "2013": ["3.7L V6", "5.0L V8", "3.5L EcoBoost V6", "6.2L V8"],
+        "2014": ["3.7L V6", "5.0L V8", "3.5L EcoBoost V6", "6.2L V8"],
+        "2015": ["3.5L V6", "2.7L EcoBoost V6", "5.0L V8", "3.5L EcoBoost V6"],
+        "2016": ["3.5L V6", "2.7L EcoBoost V6", "5.0L V8", "3.5L EcoBoost V6"],
+        "2017": ["3.5L V6", "2.7L EcoBoost V6", "5.0L V8", "3.5L EcoBoost V6"],
+        "2018": ["3.3L V6", "2.7L EcoBoost V6", "3.5L EcoBoost V6", "5.0L V8"],
+        "2019": ["3.3L V6", "2.7L EcoBoost V6", "3.5L EcoBoost V6", "5.0L V8", "3.0L Diesel"],
+        "2020": ["3.3L V6", "2.7L EcoBoost V6", "3.5L EcoBoost V6", "5.0L V8", "3.0L Diesel"],
+        "2021": ["3.3L V6", "2.7L EcoBoost V6", "3.5L EcoBoost V6", "5.0L V8", "3.5L PowerBoost Hybrid", "3.0L Diesel"],
+        "2022": ["3.3L V6", "2.7L EcoBoost V6", "3.5L EcoBoost V6", "5.0L V8", "3.5L PowerBoost Hybrid"],
+        "2023": ["3.3L V6", "2.7L EcoBoost V6", "3.5L EcoBoost V6", "5.0L V8", "3.5L PowerBoost Hybrid"],
+        "2024": ["2.7L EcoBoost V6", "5.0L V8", "3.5L EcoBoost V6", "3.5L PowerBoost Hybrid", "5.2L Supercharged V8"],
+        "2025": ["2.7L EcoBoost V6", "5.0L V8", "3.5L EcoBoost V6", "3.5L PowerBoost Hybrid", "5.2L Supercharged V8"]
+      },
+      fordF250EnginesByYear: {
+        "2006": ["5.4L V8", "6.8L V10", "6.0L Power Stroke Diesel"],
+        "2007": ["5.4L V8", "6.8L V10", "6.0L Power Stroke Diesel"],
+        "2008": ["5.4L V8", "6.8L V10", "6.4L Power Stroke Diesel"],
+        "2009": ["5.4L V8", "6.8L V10", "6.4L Power Stroke Diesel"],
+        "2010": ["5.4L V8", "6.8L V10", "6.4L Power Stroke Diesel"],
+        "2011": ["6.2L V8 Gas", "6.7L Power Stroke Diesel"],
+        "2012": ["6.2L V8 Gas", "6.7L Power Stroke Diesel"],
+        "2013": ["6.2L V8 Gas", "6.7L Power Stroke Diesel"],
+        "2014": ["6.2L V8 Gas", "6.7L Power Stroke Diesel"],
+        "2015": ["6.2L V8 Gas", "6.7L Power Stroke Diesel"],
+        "2016": ["6.2L V8 Gas", "6.7L Power Stroke Diesel"],
+        "2017": ["6.2L V8 Gas", "6.7L Power Stroke Diesel"],
+        "2018": ["6.2L V8 Gas", "6.7L Power Stroke Diesel"],
+        "2019": ["6.2L V8 Gas", "6.7L Power Stroke Diesel"],
+        "2020": ["6.2L V8 Gas", "6.7L Power Stroke Diesel"],
+        "2021": ["6.2L V8 Gas", "7.3L V8 Gas", "6.7L Power Stroke Diesel"],
+        "2022": ["6.2L V8 Gas", "7.3L V8 Gas", "6.7L Power Stroke Diesel"],
+        "2023": ["6.2L V8 Gas", "7.3L V8 Gas", "6.7L Power Stroke Diesel"],
+        "2024": ["6.8L V8 Gas", "7.3L V8 Gas", "6.7L Power Stroke Diesel"],
+        "2025": ["6.8L V8 Gas", "7.3L V8 Gas", "6.7L Power Stroke Diesel"]
+      },
+      fordF350EnginesByYear: {
+        "2006": ["5.4L V8", "6.8L V10", "6.0L Power Stroke Diesel"],
+        "2007": ["5.4L V8", "6.8L V10", "6.0L Power Stroke Diesel"],
+        "2008": ["5.4L V8", "6.8L V10", "6.4L Power Stroke Diesel"],
+        "2009": ["5.4L V8", "6.8L V10", "6.4L Power Stroke Diesel"],
+        "2010": ["5.4L V8", "6.8L V10", "6.4L Power Stroke Diesel"],
+        "2011": ["6.2L V8 Gas", "6.7L Power Stroke Diesel"],
+        "2012": ["6.2L V8 Gas", "6.7L Power Stroke Diesel"],
+        "2013": ["6.2L V8 Gas", "6.7L Power Stroke Diesel"],
+        "2014": ["6.2L V8 Gas", "6.7L Power Stroke Diesel"],
+        "2015": ["6.2L V8 Gas", "6.7L Power Stroke Diesel"],
+        "2016": ["6.2L V8 Gas", "6.7L Power Stroke Diesel"],
+        "2017": ["6.2L V8 Gas", "6.7L Power Stroke Diesel"],
+        "2018": ["6.2L V8 Gas", "6.7L Power Stroke Diesel"],
+        "2019": ["6.2L V8 Gas", "6.7L Power Stroke Diesel"],
+        "2020": ["6.2L V8 Gas", "7.3L V8 Gas", "6.7L Power Stroke Diesel"],
+        "2021": ["6.2L V8 Gas", "7.3L V8 Gas", "6.7L Power Stroke Diesel"],
+        "2022": ["6.2L V8 Gas", "7.3L V8 Gas", "6.7L Power Stroke Diesel"],
+        "2023": ["6.2L V8 Gas", "7.3L V8 Gas", "6.7L Power Stroke Diesel"],
+        "2024": ["6.8L V8 Gas", "7.3L V8 Gas", "6.7L Power Stroke Diesel"],
+        "2025": ["6.8L V8 Gas", "7.3L V8 Gas", "6.7L Power Stroke Diesel"]
+      },
+      chevy1500EnginesByYear: {
+        "2006": ["4.3L V6", "4.8L V8", "5.3L V8", "6.0L V8"],
+        "2007": ["4.3L V6", "4.8L V8", "5.3L V8", "6.0L V8"],
+        "2008": ["4.3L V6", "4.8L V8", "5.3L V8", "6.0L V8"],
+        "2009": ["4.3L V6", "4.8L V8", "5.3L V8", "6.0L V8"],
+        "2010": ["4.3L V6", "4.8L V8", "5.3L V8", "6.0L V8"],
+        "2011": ["4.3L V6", "4.8L V8", "5.3L V8", "6.2L V8"],
+        "2012": ["4.3L V6", "4.8L V8", "5.3L V8", "6.2L V8"],
+        "2013": ["4.3L V6", "4.8L V8", "5.3L V8", "6.2L V8"],
+        "2014": ["4.3L V6", "4.8L V8", "5.3L V8", "6.2L V8"],
+        "2015": ["4.3L V6", "5.3L V8", "6.2L V8", "3.0L Duramax Diesel"],
+        "2016": ["4.3L V6", "5.3L V8", "6.2L V8", "3.0L Duramax Diesel"],
+        "2017": ["4.3L V6", "5.3L V8", "6.2L V8", "3.0L Duramax Diesel"],
+        "2018": ["4.3L V6", "5.3L V8", "6.2L V8", "3.0L Duramax Diesel"],
+        "2019": ["4.3L V6", "2.7L Turbo", "5.3L V8", "6.2L V8", "3.0L Duramax Diesel"],
+        "2020": ["4.3L V6", "2.7L Turbo", "5.3L V8", "6.2L V8", "3.0L Duramax Diesel"],
+        "2021": ["2.7L Turbo", "5.3L V8", "6.2L V8", "3.0L Duramax Diesel"],
+        "2022": ["2.7L Turbo", "5.3L V8", "6.2L V8", "3.0L Duramax Diesel"],
+        "2023": ["2.7L Turbo", "5.3L V8", "6.2L V8", "3.0L Duramax Diesel"],
+        "2024": ["2.7L Turbo", "5.3L V8", "6.2L V8", "3.0L Duramax Diesel"],
+        "2025": ["2.7L Turbo", "5.3L V8", "6.2L V8", "3.0L Duramax Diesel"]
+      },
+      chevy2500EnginesByYear: {
+        "2006": ["6.0L V8 Gas", "8.1L V8 Gas", "6.6L Duramax Diesel"],
+        "2007": ["6.0L V8 Gas", "8.1L V8 Gas", "6.6L Duramax Diesel"],
+        "2008": ["6.0L V8 Gas", "6.6L Duramax Diesel"],
+        "2009": ["6.0L V8 Gas", "6.6L Duramax Diesel"],
+        "2010": ["6.0L V8 Gas", "6.6L Duramax Diesel"],
+        "2011": ["6.0L V8 Gas", "6.6L Duramax Diesel"],
+        "2012": ["6.0L V8 Gas", "6.6L Duramax Diesel"],
+        "2013": ["6.0L V8 Gas", "6.6L Duramax Diesel"],
+        "2014": ["6.0L V8 Gas", "6.6L Duramax Diesel"],
+        "2015": ["6.0L V8 Gas", "6.6L Duramax Diesel"],
+        "2016": ["6.0L V8 Gas", "6.6L Duramax Diesel"],
+        "2017": ["6.0L V8 Gas", "6.6L Duramax Diesel"],
+        "2018": ["6.0L V8 Gas", "6.6L Duramax Diesel"],
+        "2019": ["6.0L V8 Gas", "6.6L Duramax Diesel"],
+        "2020": ["6.6L V8 Gas", "6.6L Duramax Diesel"],
+        "2021": ["6.6L V8 Gas", "6.6L Duramax Diesel"],
+        "2022": ["6.6L V8 Gas", "6.6L Duramax Diesel"],
+        "2023": ["6.6L V8 Gas", "6.6L Duramax Diesel"],
+        "2024": ["6.6L V8 Gas", "6.6L Duramax Diesel"],
+        "2025": ["6.6L V8 Gas", "6.6L Duramax Diesel"]
+      },
+      chevy3500EnginesByYear: {
+        "2006": ["6.0L V8 Gas", "8.1L V8 Gas", "6.6L Duramax Diesel"],
+        "2007": ["6.0L V8 Gas", "8.1L V8 Gas", "6.6L Duramax Diesel"],
+        "2008": ["6.0L V8 Gas", "6.6L Duramax Diesel"],
+        "2009": ["6.0L V8 Gas", "6.6L Duramax Diesel"],
+        "2010": ["6.0L V8 Gas", "6.6L Duramax Diesel"],
+        "2011": ["6.0L V8 Gas", "6.6L Duramax Diesel"],
+        "2012": ["6.0L V8 Gas", "6.6L Duramax Diesel"],
+        "2013": ["6.0L V8 Gas", "6.6L Duramax Diesel"],
+        "2014": ["6.0L V8 Gas", "6.6L Duramax Diesel"],
+        "2015": ["6.0L V8 Gas", "6.6L Duramax Diesel"],
+        "2016": ["6.0L V8 Gas", "6.6L Duramax Diesel"],
+        "2017": ["6.0L V8 Gas", "6.6L Duramax Diesel"],
+        "2018": ["6.0L V8 Gas", "6.6L Duramax Diesel"],
+        "2019": ["6.0L V8 Gas", "6.6L Duramax Diesel"],
+        "2020": ["6.6L V8 Gas", "6.6L Duramax Diesel"],
+        "2021": ["6.6L V8 Gas", "6.6L Duramax Diesel"],
+        "2022": ["6.6L V8 Gas", "6.6L Duramax Diesel"],
+        "2023": ["6.6L V8 Gas", "6.6L Duramax Diesel"],
+        "2024": ["6.6L V8 Gas", "6.6L Duramax Diesel"],
+        "2025": ["6.6L V8 Gas", "6.6L Duramax Diesel"]
+      },
+      ram1500EnginesByYear: {
+        "2006": ["3.7L V6", "4.7L V8", "5.7L HEMI V8"],
+        "2007": ["3.7L V6", "4.7L V8", "5.7L HEMI V8"],
+        "2008": ["3.7L V6", "4.7L V8", "5.7L HEMI V8"],
+        "2009": ["3.7L V6", "4.7L V8", "5.7L HEMI V8"],
+        "2010": ["3.7L V6", "4.7L V8", "5.7L HEMI V8"],
+        "2011": ["3.7L V6", "4.7L V8", "5.7L HEMI V8"],
+        "2012": ["3.7L V6", "4.7L V8", "5.7L HEMI V8"],
+        "2013": ["3.6L Pentastar V6", "4.7L V8", "5.7L HEMI V8"],
+        "2014": ["3.6L Pentastar V6", "5.7L HEMI V8", "3.0L EcoDiesel"],
+        "2015": ["3.6L Pentastar V6", "5.7L HEMI V8", "3.0L EcoDiesel"],
+        "2016": ["3.6L Pentastar V6", "5.7L HEMI V8", "3.0L EcoDiesel"],
+        "2017": ["3.6L Pentastar V6", "5.7L HEMI V8", "3.0L EcoDiesel"],
+        "2018": ["3.6L Pentastar V6", "5.7L HEMI V8", "3.0L EcoDiesel"],
+        "2019": ["3.6L Pentastar V6", "5.7L HEMI V8", "3.0L EcoDiesel"],
+        "2020": ["3.6L Pentastar V6", "5.7L HEMI V8", "3.0L EcoDiesel"],
+        "2021": ["3.6L Pentastar V6", "5.7L HEMI V8", "3.0L EcoDiesel"],
+        "2022": ["3.6L Pentastar V6", "5.7L HEMI V8", "3.0L EcoDiesel"],
+        "2023": ["3.6L Pentastar V6", "5.7L HEMI V8", "3.0L EcoDiesel"],
+        "2024": ["3.6L Pentastar V6", "3.0L Hurricane I6"],
+        "2025": ["3.6L Pentastar V6", "3.0L Hurricane I6"]
+      },
+      ram2500EnginesByYear: {
+        "2006": ["5.7L HEMI V8", "5.9L Cummins Diesel"],
+        "2007": ["5.7L HEMI V8", "5.9L Cummins Diesel", "6.7L Cummins Diesel"],
+        "2008": ["5.7L HEMI V8", "6.7L Cummins Diesel"],
+        "2009": ["5.7L HEMI V8", "6.7L Cummins Diesel"],
+        "2010": ["5.7L HEMI V8", "6.7L Cummins Diesel"],
+        "2011": ["5.7L HEMI V8", "6.7L Cummins Diesel"],
+        "2012": ["5.7L HEMI V8", "6.7L Cummins Diesel"],
+        "2013": ["5.7L HEMI V8", "6.7L Cummins Diesel"],
+        "2014": ["6.4L HEMI V8", "6.7L Cummins Diesel"],
+        "2015": ["6.4L HEMI V8", "6.7L Cummins Diesel"],
+        "2016": ["6.4L HEMI V8", "6.7L Cummins Diesel"],
+        "2017": ["6.4L HEMI V8", "6.7L Cummins Diesel"],
+        "2018": ["6.4L HEMI V8", "6.7L Cummins Diesel"],
+        "2019": ["6.4L HEMI V8", "6.7L Cummins Diesel"],
+        "2020": ["6.4L HEMI V8", "6.7L Cummins Diesel"],
+        "2021": ["6.4L HEMI V8", "6.7L Cummins Diesel"],
+        "2022": ["6.4L HEMI V8", "6.7L Cummins Diesel"],
+        "2023": ["6.4L HEMI V8", "6.7L Cummins Diesel"],
+        "2024": ["6.4L HEMI V8", "6.7L Cummins Diesel"],
+        "2025": ["6.4L HEMI V8", "6.7L Cummins Diesel"]
+      },
+      ram3500EnginesByYear: {
+        "2006": ["5.7L HEMI V8", "5.9L Cummins Diesel"],
+        "2007": ["5.7L HEMI V8", "5.9L Cummins Diesel", "6.7L Cummins Diesel"],
+        "2008": ["5.7L HEMI V8", "6.7L Cummins Diesel"],
+        "2009": ["5.7L HEMI V8", "6.7L Cummins Diesel"],
+        "2010": ["5.7L HEMI V8", "6.7L Cummins Diesel"],
+        "2011": ["5.7L HEMI V8", "6.7L Cummins Diesel"],
+        "2012": ["5.7L HEMI V8", "6.7L Cummins Diesel"],
+        "2013": ["5.7L HEMI V8", "6.7L Cummins Diesel"],
+        "2014": ["6.4L HEMI V8", "6.7L Cummins Diesel"],
+        "2015": ["6.4L HEMI V8", "6.7L Cummins Diesel"],
+        "2016": ["6.4L HEMI V8", "6.7L Cummins Diesel"],
+        "2017": ["6.4L HEMI V8", "6.7L Cummins Diesel"],
+        "2018": ["6.4L HEMI V8", "6.7L Cummins Diesel"],
+        "2019": ["6.4L HEMI V8", "6.7L Cummins Diesel"],
+        "2020": ["6.4L HEMI V8", "6.7L Cummins Diesel"],
+        "2021": ["6.4L HEMI V8", "6.7L Cummins Diesel"],
+        "2022": ["6.4L HEMI V8", "6.7L Cummins Diesel"],
+        "2023": ["6.4L HEMI V8", "6.7L Cummins Diesel"],
+        "2024": ["6.4L HEMI V8", "6.7L Cummins Diesel"],
+        "2025": ["6.4L HEMI V8", "6.7L Cummins Diesel"]
+      },
+      toyotaTacomaEnginesByYear: {
+        "2006": ["2.7L I4", "4.0L V6"],
+        "2007": ["2.7L I4", "4.0L V6"],
+        "2008": ["2.7L I4", "4.0L V6"],
+        "2009": ["2.7L I4", "4.0L V6"],
+        "2010": ["2.7L I4", "4.0L V6"],
+        "2011": ["2.7L I4", "4.0L V6"],
+        "2012": ["2.7L I4", "4.0L V6"],
+        "2013": ["2.7L I4", "4.0L V6"],
+        "2014": ["2.7L I4", "4.0L V6"],
+        "2015": ["2.7L I4", "4.0L V6"],
+        "2016": ["2.7L I4", "3.5L V6"],
+        "2017": ["2.7L I4", "3.5L V6"],
+        "2018": ["2.7L I4", "3.5L V6"],
+        "2019": ["2.7L I4", "3.5L V6"],
+        "2020": ["2.7L I4", "3.5L V6"],
+        "2021": ["2.7L I4", "3.5L V6"],
+        "2022": ["2.7L I4", "3.5L V6"],
+        "2023": ["2.7L I4", "3.5L V6"],
+        "2024": ["2.4L Turbo I4", "2.4L Turbo Hybrid I4"],
+        "2025": ["2.4L Turbo I4", "2.4L Turbo Hybrid I4"]
+      },
+      toyotaTundraEnginesByYear: {
+        "2006": ["4.0L V6", "4.7L V8"],
+        "2007": ["4.0L V6", "4.7L V8", "5.7L V8"],
+        "2008": ["4.0L V6", "4.7L V8", "5.7L V8"],
+        "2009": ["4.0L V6", "4.7L V8", "5.7L V8"],
+        "2010": ["4.0L V6", "4.7L V8", "5.7L V8"],
+        "2011": ["4.0L V6", "4.7L V8", "5.7L V8"],
+        "2012": ["4.0L V6", "4.7L V8", "5.7L V8"],
+        "2013": ["4.0L V6", "4.6L V8", "5.7L V8"],
+        "2014": ["4.0L V6", "4.6L V8", "5.7L V8"],
+        "2015": ["4.0L V6", "4.6L V8", "5.7L V8"],
+        "2016": ["4.0L V6", "4.6L V8", "5.7L V8"],
+        "2017": ["4.6L V8", "5.7L V8"],
+        "2018": ["4.6L V8", "5.7L V8"],
+        "2019": ["4.6L V8", "5.7L V8"],
+        "2020": ["4.6L V8", "5.7L V8"],
+        "2021": ["4.6L V8", "5.7L V8"],
+        "2022": ["3.5L Twin-Turbo V6", "3.5L Twin-Turbo Hybrid V6"],
+        "2023": ["3.5L Twin-Turbo V6", "3.5L Twin-Turbo Hybrid V6"],
+        "2024": ["3.4L Twin-Turbo V6", "3.4L Twin-Turbo Hybrid V6"],
+        "2025": ["3.4L Twin-Turbo V6", "3.4L Twin-Turbo Hybrid V6"]
+      },
+      nissanTitanEnginesByYear: {
+        "2006": ["4.0L V6", "5.6L V8"],
+        "2007": ["4.0L V6", "5.6L V8"],
+        "2008": ["4.0L V6", "5.6L V8"],
+        "2009": ["4.0L V6", "5.6L V8"],
+        "2010": ["4.0L V6", "5.6L V8"],
+        "2011": ["4.0L V6", "5.6L V8"],
+        "2012": ["4.0L V6", "5.6L V8"],
+        "2013": ["4.0L V6", "5.6L V8"],
+        "2014": ["4.0L V6", "5.6L V8"],
+        "2015": ["4.0L V6", "5.6L V8"],
+        "2016": ["5.6L V8", "5.0L Cummins Diesel"],
+        "2017": ["5.6L V8", "5.0L Cummins Diesel"],
+        "2018": ["5.6L V8", "5.0L Cummins Diesel"],
+        "2019": ["5.6L V8", "5.0L Cummins Diesel"],
+        "2020": ["5.6L V8"],
+        "2021": ["5.6L V8"],
+        "2022": ["5.6L V8"],
+        "2023": ["5.6L V8"],
+        "2024": ["5.6L V8"],
+        "2025": ["5.6L V8"]
+      },
+      nissanFrontierEnginesByYear: {
+        "2006": ["2.5L I4", "4.0L V6"],
+        "2007": ["2.5L I4", "4.0L V6"],
+        "2008": ["2.5L I4", "4.0L V6"],
+        "2009": ["2.5L I4", "4.0L V6"],
+        "2010": ["2.5L I4", "4.0L V6"],
+        "2011": ["2.5L I4", "4.0L V6"],
+        "2012": ["2.5L I4", "4.0L V6"],
+        "2013": ["2.5L I4", "4.0L V6"],
+        "2014": ["2.5L I4", "4.0L V6"],
+        "2015": ["2.5L I4", "4.0L V6"],
+        "2016": ["2.5L I4", "4.0L V6"],
+        "2017": ["2.5L I4", "4.0L V6"],
+        "2018": ["2.5L I4", "4.0L V6"],
+        "2019": ["2.5L I4", "4.0L V6"],
+        "2020": ["3.8L V6"],
+        "2021": ["3.8L V6"],
+        "2022": ["3.8L V6"],
+        "2023": ["3.8L V6"],
+        "2024": ["3.8L V6"],
+        "2025": ["3.8L V6"]
+      },
+      bedSizesByKey: {
+        "ford:f150:2006": ["5.5", "6.5", "8.0"],
+        "ford:f150:2007": ["5.5", "6.5", "8.0"],
+        "ford:f150:2008": ["5.5", "6.5", "8.0"],
+        "ford:f150:2009": ["5.5", "6.5", "8.0"],
+        "ford:f150:2010": ["5.5", "6.5", "8.0"],
+        "ford:f150:2011": ["5.5", "6.5", "8.0"],
+        "ford:f150:2012": ["5.5", "6.5", "8.0"],
+        "ford:f150:2013": ["5.5", "6.5", "8.0"],
+        "ford:f150:2014": ["5.5", "6.5", "8.0"],
+        "ford:f150:2015": ["5.5", "6.5", "8.0"],
+        "ford:f150:2016": ["5.5", "6.5", "8.0"],
+        "ford:f150:2017": ["5.5", "6.5", "8.0"],
+        "ford:f150:2018": ["5.5", "6.5", "8.0"],
+        "ford:f150:2019": ["5.5", "6.5", "8.0"],
+        "ford:f150:2020": ["5.5", "6.5", "8.0"],
+        "ford:f150:2021": ["5.5", "6.5", "8.0"],
+        "ford:f150:2022": ["5.5", "6.5", "8.0"],
+        "ford:f150:2023": ["5.5", "6.5", "8.0"],
+        "ford:f150:2024": ["5.5", "6.5", "8.0"],
+        "ford:f150:2025": ["5.5", "6.5", "8.0"],
+        "ford:f250:2006": ["6.75", "8.0"],
+        "ford:f250:2007": ["6.75", "8.0"],
+        "ford:f250:2008": ["6.75", "8.0"],
+        "ford:f250:2009": ["6.75", "8.0"],
+        "ford:f250:2010": ["6.75", "8.0"],
+        "ford:f250:2011": ["6.75", "8.0"],
+        "ford:f250:2012": ["6.75", "8.0"],
+        "ford:f250:2013": ["6.75", "8.0"],
+        "ford:f250:2014": ["6.75", "8.0"],
+        "ford:f250:2015": ["6.75", "8.0"],
+        "ford:f250:2016": ["6.75", "8.0"],
+        "ford:f250:2017": ["6.75", "8.0"],
+        "ford:f250:2018": ["6.75", "8.0"],
+        "ford:f250:2019": ["6.75", "8.0"],
+        "ford:f250:2020": ["6.75", "8.0"],
+        "ford:f250:2021": ["6.75", "8.0"],
+        "ford:f250:2022": ["6.75", "8.0"],
+        "ford:f250:2023": ["6.75", "8.0"],
+        "ford:f250:2024": ["6.75", "8.0"],
+        "ford:f250:2025": ["6.75", "8.0"],
+        "ford:f350:2006": ["6.75", "8.0"],
+        "ford:f350:2007": ["6.75", "8.0"],
+        "ford:f350:2008": ["6.75", "8.0"],
+        "ford:f350:2009": ["6.75", "8.0"],
+        "ford:f350:2010": ["6.75", "8.0"],
+        "ford:f350:2011": ["6.75", "8.0"],
+        "ford:f350:2012": ["6.75", "8.0"],
+        "ford:f350:2013": ["6.75", "8.0"],
+        "ford:f350:2014": ["6.75", "8.0"],
+        "ford:f350:2015": ["6.75", "8.0"],
+        "ford:f350:2016": ["6.75", "8.0"],
+        "ford:f350:2017": ["6.75", "8.0"],
+        "ford:f350:2018": ["6.75", "8.0"],
+        "ford:f350:2019": ["6.75", "8.0"],
+        "ford:f350:2020": ["6.75", "8.0"],
+        "ford:f350:2021": ["6.75", "8.0"],
+        "ford:f350:2022": ["6.75", "8.0"],
+        "ford:f350:2023": ["6.75", "8.0"],
+        "ford:f350:2024": ["6.75", "8.0"],
+        "ford:f350:2025": ["6.75", "8.0"],
+        "gmchevy:1500:2006": ["5.75", "6.5", "8.0"],
+        "gmchevy:1500:2007": ["5.75", "6.5", "8.0"],
+        "gmchevy:1500:2008": ["5.75", "6.5", "8.0"],
+        "gmchevy:1500:2009": ["5.75", "6.5", "8.0"],
+        "gmchevy:1500:2010": ["5.75", "6.5", "8.0"],
+        "gmchevy:1500:2011": ["5.75", "6.5", "8.0"],
+        "gmchevy:1500:2012": ["5.75", "6.5", "8.0"],
+        "gmchevy:1500:2013": ["5.75", "6.5", "8.0"],
+        "gmchevy:1500:2014": ["5.75", "6.5", "8.0"],
+        "gmchevy:1500:2015": ["5.75", "6.5", "8.0"],
+        "gmchevy:1500:2016": ["5.75", "6.5", "8.0"],
+        "gmchevy:1500:2017": ["5.75", "6.5", "8.0"],
+        "gmchevy:1500:2018": ["5.75", "6.5", "8.0"],
+        "gmchevy:1500:2019": ["5.75", "6.5", "8.0"],
+        "gmchevy:1500:2020": ["5.75", "6.5", "8.0"],
+        "gmchevy:1500:2021": ["5.75", "6.5", "8.0"],
+        "gmchevy:1500:2022": ["5.75", "6.5", "8.0"],
+        "gmchevy:1500:2023": ["5.75", "6.5", "8.0"],
+        "gmchevy:1500:2024": ["5.75", "6.5", "8.0"],
+        "gmchevy:1500:2025": ["5.75", "6.5", "8.0"],
+        "gmgmc:1500:2006": ["5.75", "6.5", "8.0"],
+        "gmgmc:1500:2007": ["5.75", "6.5", "8.0"],
+        "gmgmc:1500:2008": ["5.75", "6.5", "8.0"],
+        "gmgmc:1500:2009": ["5.75", "6.5", "8.0"],
+        "gmgmc:1500:2010": ["5.75", "6.5", "8.0"],
+        "gmgmc:1500:2011": ["5.75", "6.5", "8.0"],
+        "gmgmc:1500:2012": ["5.75", "6.5", "8.0"],
+        "gmgmc:1500:2013": ["5.75", "6.5", "8.0"],
+        "gmgmc:1500:2014": ["5.75", "6.5", "8.0"],
+        "gmgmc:1500:2015": ["5.75", "6.5", "8.0"],
+        "gmgmc:1500:2016": ["5.75", "6.5", "8.0"],
+        "gmgmc:1500:2017": ["5.75", "6.5", "8.0"],
+        "gmgmc:1500:2018": ["5.75", "6.5", "8.0"],
+        "gmgmc:1500:2019": ["5.75", "6.5", "8.0"],
+        "gmgmc:1500:2020": ["5.75", "6.5", "8.0"],
+        "gmgmc:1500:2021": ["5.75", "6.5", "8.0"],
+        "gmgmc:1500:2022": ["5.75", "6.5", "8.0"],
+        "gmgmc:1500:2023": ["5.75", "6.5", "8.0"],
+        "gmgmc:1500:2024": ["5.75", "6.5", "8.0"],
+        "gmgmc:1500:2025": ["5.75", "6.5", "8.0"],
+        "gmchevy:2500:2006": ["6.5", "8.0"],
+        "gmchevy:2500:2007": ["6.5", "8.0"],
+        "gmchevy:2500:2008": ["6.5", "8.0"],
+        "gmchevy:2500:2009": ["6.5", "8.0"],
+        "gmchevy:2500:2010": ["6.5", "8.0"],
+        "gmchevy:2500:2011": ["6.5", "8.0"],
+        "gmchevy:2500:2012": ["6.5", "8.0"],
+        "gmchevy:2500:2013": ["6.5", "8.0"],
+        "gmchevy:2500:2014": ["6.5", "8.0"],
+        "gmchevy:2500:2015": ["6.5", "8.0"],
+        "gmchevy:2500:2016": ["6.5", "8.0"],
+        "gmchevy:2500:2017": ["6.5", "8.0"],
+        "gmchevy:2500:2018": ["6.5", "8.0"],
+        "gmchevy:2500:2019": ["6.5", "8.0"],
+        "gmchevy:2500:2020": ["6.75", "8.0"],
+        "gmchevy:2500:2021": ["6.75", "8.0"],
+        "gmchevy:2500:2022": ["6.75", "8.0"],
+        "gmchevy:2500:2023": ["6.75", "8.0"],
+        "gmchevy:2500:2024": ["6.75", "8.0"],
+        "gmchevy:2500:2025": ["6.75", "8.0"],
+        "gmgmc:2500:2006": ["6.5", "8.0"],
+        "gmgmc:2500:2007": ["6.5", "8.0"],
+        "gmgmc:2500:2008": ["6.5", "8.0"],
+        "gmgmc:2500:2009": ["6.5", "8.0"],
+        "gmgmc:2500:2010": ["6.5", "8.0"],
+        "gmgmc:2500:2011": ["6.5", "8.0"],
+        "gmgmc:2500:2012": ["6.5", "8.0"],
+        "gmgmc:2500:2013": ["6.5", "8.0"],
+        "gmgmc:2500:2014": ["6.5", "8.0"],
+        "gmgmc:2500:2015": ["6.5", "8.0"],
+        "gmgmc:2500:2016": ["6.5", "8.0"],
+        "gmgmc:2500:2017": ["6.5", "8.0"],
+        "gmgmc:2500:2018": ["6.5", "8.0"],
+        "gmgmc:2500:2019": ["6.5", "8.0"],
+        "gmgmc:2500:2020": ["6.75", "8.0"],
+        "gmgmc:2500:2021": ["6.75", "8.0"],
+        "gmgmc:2500:2022": ["6.75", "8.0"],
+        "gmgmc:2500:2023": ["6.75", "8.0"],
+        "gmgmc:2500:2024": ["6.75", "8.0"],
+        "gmgmc:2500:2025": ["6.75", "8.0"],
+        "toyota:tacoma:2006": ["5.0", "6.0"],
+        "toyota:tacoma:2007": ["5.0", "6.0"],
+        "toyota:tacoma:2008": ["5.0", "6.0"],
+        "toyota:tacoma:2009": ["5.0", "6.0"],
+        "toyota:tacoma:2010": ["5.0", "6.0"],
+        "toyota:tacoma:2011": ["5.0", "6.0"],
+        "toyota:tacoma:2012": ["5.0", "6.0"],
+        "toyota:tacoma:2013": ["5.0", "6.0"],
+        "toyota:tacoma:2014": ["5.0", "6.0"],
+        "toyota:tacoma:2015": ["5.0", "6.0"],
+        "toyota:tacoma:2016": ["5.0", "6.0"],
+        "toyota:tacoma:2017": ["5.0", "6.0"],
+        "toyota:tacoma:2018": ["5.0", "6.0"],
+        "toyota:tacoma:2019": ["5.0", "6.0"],
+        "toyota:tacoma:2020": ["5.0", "6.0"],
+        "toyota:tacoma:2021": ["5.0", "6.0"],
+        "toyota:tacoma:2022": ["5.0", "6.0"],
+        "toyota:tacoma:2023": ["5.0", "6.0"],
+        "toyota:tacoma:2024": ["5.0", "6.0"],
+        "toyota:tacoma:2025": ["5.0", "6.0"],
+        "toyota:tundra:2006": ["6.5", "8.0"],
+        "toyota:tundra:2007": ["6.5", "8.0"],
+        "toyota:tundra:2008": ["6.5", "8.0"],
+        "toyota:tundra:2009": ["6.5", "8.0"],
+        "toyota:tundra:2010": ["6.5", "8.0"],
+        "toyota:tundra:2011": ["6.5", "8.0"],
+        "toyota:tundra:2012": ["6.5", "8.0"],
+        "toyota:tundra:2013": ["6.5", "8.0"],
+        "toyota:tundra:2014": ["6.5", "8.0"],
+        "toyota:tundra:2015": ["6.5", "8.0"],
+        "toyota:tundra:2016": ["6.5", "8.0"],
+        "toyota:tundra:2017": ["6.5", "8.0"],
+        "toyota:tundra:2018": ["6.5", "8.0"],
+        "toyota:tundra:2019": ["6.5", "8.0"],
+        "toyota:tundra:2020": ["6.5", "8.0"],
+        "toyota:tundra:2021": ["6.5", "8.0"],
+        "toyota:tundra:2022": ["5.5", "6.5"],
+        "toyota:tundra:2023": ["5.5", "6.5"],
+        "toyota:tundra:2024": ["5.5", "6.5"],
+        "toyota:tundra:2025": ["5.5", "6.5"]
+      }
+    };
+
+    function setOptions(selectEl, options, placeholderLabel) {
+      selectEl.innerHTML = "";
+      if (placeholderLabel) {
+        const opt = document.createElement("option");
+        opt.value = "";
+        opt.textContent = placeholderLabel;
+        selectEl.appendChild(opt);
+      }
+      for (const o of options) {
+        const opt = document.createElement("option");
+        opt.value = o.value ?? o;
+        opt.textContent = o.label ?? o;
+        selectEl.appendChild(opt);
+      }
+    }
+
+    function populateYears() {
+      const years = [];
+      const start = 2006;
+      const end = 2025;
+      for (let y = end; y >= start; y -= 1) {
+        years.push({ value: String(y), label: String(y) });
+      }
+      setOptions($("year"), years, "Choose year");
+      $("year").value = "";
+    }
+
+    function showStep(n) {
+      const steps = [$("step1"), $("step2"), $("step3"), $("step4")];
+      steps.forEach((el, i) => el.classList.toggle("hidden", i !== (n - 1)));
+      const stepPill = $("stepPill");
+      if (stepPill) stepPill.textContent = `Step ${n} of 4`;
+      document.body.dataset.step = String(n);
+
+      // Update progress bar
+      const progressSteps = document.querySelectorAll('.progress-step');
+      progressSteps.forEach((step, i) => {
+        step.classList.remove('active', 'completed');
+        if (i < n - 1) {
+          step.classList.add('completed');
+        } else if (i === n - 1) {
+          step.classList.add('active');
+        }
+      });
+    }
+
+    function inferClassFromModel(modelVal) {
+      if (modelVal === "tacoma" || modelVal === "frontier") return "midsize";
+      if (modelVal === "f150" || modelVal === "1500" || modelVal === "tundra" || modelVal === "titan") return "half";
+      if (modelVal === "f250" || modelVal === "2500") return "threeq";
+      if (modelVal === "f350" || modelVal === "3500") return "one";
+      return "unknown";
+    }
+
+    function updateModels() {
+      const makeVal = $("make").value;
+      const models = data.modelsByMake[makeVal] || data.modelsByMake.other;
+      setOptions($("model"), models, "Choose model");
+      $("model").value = "";
+      $("truckClass").value = "unknown";
+      updateBedOptions();
+      updateEngines();
+    }
+
+    function updateEngines() {
+      const makeVal = $("make").value;
+      const modelVal = $("model").value;
+      const yearVal = $("year").value;
+      let engines;
+
+      if (makeVal === "ford" && yearVal && modelVal === "f150" && data.fordF150EnginesByYear[yearVal]) {
+        engines = data.fordF150EnginesByYear[yearVal];
+      } else if (makeVal === "ford" && yearVal && modelVal === "f250" && data.fordF250EnginesByYear[yearVal]) {
+        engines = data.fordF250EnginesByYear[yearVal];
+      } else if (makeVal === "ford" && yearVal && modelVal === "f350" && data.fordF350EnginesByYear[yearVal]) {
+        engines = data.fordF350EnginesByYear[yearVal];
+      } else if ((makeVal === "gmchevy" || makeVal === "gmgmc") && yearVal && modelVal === "1500" && data.chevy1500EnginesByYear[yearVal]) {
+        engines = data.chevy1500EnginesByYear[yearVal];
+      } else if ((makeVal === "gmchevy" || makeVal === "gmgmc") && yearVal && modelVal === "2500" && data.chevy2500EnginesByYear[yearVal]) {
+        engines = data.chevy2500EnginesByYear[yearVal];
+      } else if ((makeVal === "gmchevy" || makeVal === "gmgmc") && yearVal && modelVal === "3500" && data.chevy3500EnginesByYear[yearVal]) {
+        engines = data.chevy3500EnginesByYear[yearVal];
+      } else if (makeVal === "ram" && yearVal && modelVal === "1500" && data.ram1500EnginesByYear[yearVal]) {
+        engines = data.ram1500EnginesByYear[yearVal];
+      } else if (makeVal === "ram" && yearVal && modelVal === "2500" && data.ram2500EnginesByYear[yearVal]) {
+        engines = data.ram2500EnginesByYear[yearVal];
+      } else if (makeVal === "ram" && yearVal && modelVal === "3500" && data.ram3500EnginesByYear[yearVal]) {
+        engines = data.ram3500EnginesByYear[yearVal];
+      } else if (makeVal === "toyota" && yearVal && modelVal === "tacoma" && data.toyotaTacomaEnginesByYear[yearVal]) {
+        engines = data.toyotaTacomaEnginesByYear[yearVal];
+      } else if (makeVal === "toyota" && yearVal && modelVal === "tundra" && data.toyotaTundraEnginesByYear[yearVal]) {
+        engines = data.toyotaTundraEnginesByYear[yearVal];
+      } else if (makeVal === "nissan" && yearVal && modelVal === "titan" && data.nissanTitanEnginesByYear[yearVal]) {
+        engines = data.nissanTitanEnginesByYear[yearVal];
+      } else if (makeVal === "nissan" && yearVal && modelVal === "frontier" && data.nissanFrontierEnginesByYear[yearVal]) {
+        engines = data.nissanFrontierEnginesByYear[yearVal];
+      } else {
+        engines =
+          makeVal === "gmchevy" || makeVal === "gmgmc" ? data.enginesByMake.gm :
+            data.enginesByMake[makeVal] || data.enginesByMake.other;
+      }
+
+      const engineOptions = ["Not sure", ...engines];
+      setOptions($("engine"), engineOptions.map(e => ({ value: e.toLowerCase(), label: e })), "Choose engine");
+      $("engine").value = "";
+    }
+
+    function updateClassAuto() {
+      const inferred = inferClassFromModel($("model").value);
+      $("truckClass").value = inferred;
+      updateBedOptions();
+    }
+
+    function updateBedOptions() {
+      const c = $("truckClass").value;
+      const makeVal = $("make").value;
+      const modelVal = $("model").value;
+      const yearVal = $("year").value;
+      const key = makeVal && modelVal && yearVal ? `${makeVal}:${modelVal}:${yearVal}` : "";
+      let opts = [];
+      if (key && data.bedSizesByKey && data.bedSizesByKey[key]) {
+        opts = data.bedSizesByKey[key].map(size => ({
+          value: size,
+          label: `${size} ft`
+        }));
+        opts.push({ value: "unknown", label: "Not sure" });
+      } else if (c === "half" || c === "midsize") {
+        opts = [
+          { value: "short66", label: "Short bed about 6 ft 6 in" },
+          { value: "supershort", label: "Super short bed about 5 ft 5 in to 5 ft 7 in" },
+          { value: "unknown", label: "Not sure" }
+        ];
+      } else if (c === "threeq" || c === "one") {
+        opts = [
+          { value: "short66", label: "Short bed about 6 ft 6 in" },
+          { value: "long8", label: "Long bed about 8 ft" },
+          { value: "unknown", label: "Not sure" }
+        ];
+      } else {
+        opts = [
+          { value: "short66", label: "Short bed about 6 ft 6 in" },
+          { value: "long8", label: "Long bed about 8 ft" },
+          { value: "supershort", label: "Super short bed about 5 ft 5 in to 5 ft 7 in" },
+          { value: "unknown", label: "Not sure" }
+        ];
+      }
+      setOptions($("bedSize"), opts, "Choose bed size");
+      $("bedSize").value = "";
+      applySuperShortPrepRule();
+    }
+
+    function applySuperShortPrepRule() {
+      const bed = $("bedSize").value;
+      const prep = $("factoryPrep");
+      const msg = $("superShortMsg");
+      const ruleMsg = $("prepRuleMsg");
+      const makeVal = $("make").value;
+      const bedCat = bedCategory(bed);
+
+      msg.classList.add("hidden");
+      ruleMsg.textContent = "";
+
+      const disableYes = (makeVal === "toyota") || (bedCat === "supershort");
+      if (disableYes) prep.value = "no";
+
+      [...prep.options].forEach(o => {
+        if (o.value === "yes") o.disabled = disableYes;
+        if (o.value !== "yes") o.disabled = false;
+      });
+
+      if (makeVal === "toyota") {
+        ruleMsg.textContent = "Factory puck option not offered on Toyota trucks.";
+      }
+
+      if (bedCat === "supershort") {
+        msg.textContent = "Super short beds are not offered with factory puck systems. If the customer believes they have pucks, request a clear photo of the bed floor with covers open and confirm what is installed.";
+        msg.classList.remove("hidden");
+        ruleMsg.textContent += (ruleMsg.textContent ? " " : "") + "Factory puck option locked to No for super short beds.";
+      }
+
+      updatePrepBrandVisibility();
+    }
+
+    function updatePrepBrandVisibility() {
+      const prepVal = $("factoryPrep").value;
+      $("prepPhotoWrap").classList.toggle("hidden", prepVal !== "unknown");
+    }
+
+    function updateSidebar() {
+      const yearVal = $("year").value || "—";
+      const makeVal = normalizeLabel($("make")) || "—";
+      const modelVal = normalizeLabel($("model")) || "—";
+      const bedVal = normalizeLabel($("bedSize")) || "—";
+      const prepVal = normalizeLabel($("factoryPrep")) || "—";
+      const engineVal = normalizeLabel($("engine")) || "—";
+
+      $("sumYear").textContent = yearVal;
+      $("sumMake").textContent = makeVal;
+      $("sumModel").textContent = modelVal;
+      $("sumBed").textContent = bedVal;
+      $("sumPrep").textContent = prepVal;
+      $("sumEngine").textContent = engineVal;
+    }
+
+    function updateBedWarnings() {
+      const tonneau = $("tonneau").value;
+      const toolbox = $("toolbox").value;
+      const cap = $("cap").value;
+      const fuel = $("fuelTank").value;
+      const liner = $("bedLiner").value;
+      const other = $("otherBed").value.trim();
+
+      let warnings = "";
+
+      if (toolbox !== "none") warnings += "Confirm hitch position and turning clearance with the toolbox installed.\n\n";
+      if (tonneau !== "none") warnings += "Confirm tonneau clearance with hitch height and bed rail clearance.\n\n";
+      if (cap === "yes") warnings += "Confirm bed rail clearance and whether any cap hardware interferes.\n\n";
+      if (fuel === "yes") warnings += "An in bed fuel tank may reduce hitch placement options and clearance. Confirm before quoting.\n\n";
+      if (liner === "dropin") warnings += "Drop in liners can interfere with brackets and rail fit. Confirm before install.\n\n";
+      if (other) warnings += "Other bed items noted. Confirm clearance and mounting space before quoting.\n\n";
+
+      const box = $("bedWarnings");
+      if (warnings.trim()) {
+        box.textContent = warnings.trim();
+        box.classList.remove("hidden");
+      } else {
+        box.classList.add("hidden");
+        box.textContent = "";
+      }
+    }
+
+    function normalizeLabel(selectEl) {
+      const opt = selectEl.options[selectEl.selectedIndex];
+      return opt ? opt.textContent : "";
+    }
+
+    function classLabel(val) {
+      if (val === "midsize") return "Midsize";
+      if (val === "half") return "Half ton";
+      if (val === "threeq") return "Three quarter ton";
+      if (val === "one") return "One ton";
+      return "Not sure";
+    }
+
+    function bedCategory(val) {
+      if (!val || val === "unknown") return "unknown";
+      if (val === "long8") return "long";
+      if (val === "short66") return "short";
+      if (val === "supershort") return "supershort";
+      const num = parseFloat(val);
+      if (!Number.isNaN(num)) {
+        if (num >= 7.5) return "long";
+        if (num > 5.75) return "short";
+        return "supershort";
+      }
+      return "unknown";
+    }
+
+    function determineSkuLane(context) {
+      const {
+        truckClass,
+        bedCategory,
+        factoryPrep,
+        frontCapConfirmed,
+        rotatingPinBox,
+        gooseneckPref,
+        gooseneckApproved
+      } = context;
+
+      let lane = {
+        status: "consult",
+        recommendation: "",
+        skuLane: "",
+        notes: []
+      };
+
+      // ---- Super short bed ----
+      if (bedCategory === "supershort") {
+        lane.status = "consult";
+        lane.skuLane = "PullRite SuperGlide only";
+        lane.recommendation = "Super short bed requires clearance verification";
+        lane.notes.push("Do not quote fixed or manual slider");
+        return lane;
+      }
+
+      // ---- Long bed ----
+      if (bedCategory === "long") {
+        lane.status = "ready";
+        lane.skuLane = "Fixed fifth wheel";
+        lane.recommendation = "Curt fixed standard, PullRite fixed premium";
+      }
+
+      // ---- Short bed ----
+      if (bedCategory === "short") {
+        if (frontCapConfirmed) {
+          lane.status = "quote_with_caution";
+          lane.skuLane = "Fixed fifth wheel allowed";
+          lane.recommendation = "Curt fixed possible, slider safer";
+          lane.notes.push("Front cap clearance confirmed");
+        } else {
+          lane.status = "ready";
+          lane.skuLane = "Sliding fifth wheel";
+          lane.recommendation = "Curt slider standard, PullRite SuperGlide premium";
+        }
+      }
+
+      // ---- Half ton guardrail ----
+      if (truckClass === "half") {
+        lane.notes.push("Verify payload sticker before final SKU");
+      }
+
+      // ---- Rotating pin box warning ----
+      if (rotatingPinBox) {
+        lane.status = "quote_with_caution";
+        lane.notes.push("Rotating pin box requires compatibility confirmation");
+      }
+
+      // ---- Factory prep logic ----
+      if (factoryPrep === "yes") {
+        lane.notes.push("Use OEM puck compatible version only");
+      } else if (factoryPrep === "unknown") {
+        lane.status = "do_not_quote";
+        lane.notes.push("Photo required to confirm rails or factory prep");
+      }
+
+      // ---- Gooseneck gate ----
+      if (gooseneckPref) {
+        if (!gooseneckApproved) {
+          lane.notes.push("Gooseneck requested but not approved");
+        } else {
+          lane.notes.push("Pin box replacement or Gen Y may be considered");
+        }
+      }
+
+      return lane;
+    }
+
+    function buildRecommendationText() {
+      const make = normalizeLabel($("make"));
+      const model = normalizeLabel($("model"));
+      const year = $("year").value.trim();
+
+      const bedVal = $("bedSize").value;
+      const bed = bedVal ? normalizeLabel($("bedSize")) : "Not selected";
+      const bedCat = bedCategory(bedVal);
+
+      const prep = normalizeLabel($("factoryPrep"));
+      const prepVal = $("factoryPrep").value;
+
+      const lines = [];
+      const summaryParts = [
+        year || "Year?",
+        make || "Make?",
+        model || "Model?",
+        bed || "Bed size?",
+        `Puck: ${prep || "?"}`
+      ];
+      lines.push(`**${summaryParts.join(" | ")}**`);
+      lines.push("");
+      lines.push("Hitch choice");
+
+      const rotatingPinBox = $("rotatingPinBox").value === "yes";
+
+      const goosePrefVal = $("gooseneckPref").value;
+      const gooseApprovedVal = $("gooseneckApproval").value;
+      const goosePref = goosePrefVal === "yes" || normalizeLabel($("gooseneckPref")).toLowerCase() === "yes";
+      const gooseApproved = gooseApprovedVal === "yes";
+
+      if (goosePref) {
+        lines.push("- Gen-Y gooseneck pin box conversion");
+      } else if (rotatingPinBox) {
+        lines.push("- Curt fixed fifth wheel (non-slide)");
+      } else if (bedCat === "long") {
+        lines.push("- Curt fixed fifth wheel (8 ft bed)");
+      } else if (bedCat === "short") {
+        lines.push("- Curt manual slider");
+        lines.push("- PullRite SuperGlide auto slide with capture plate");
+      } else if (bedCat === "supershort") {
+        lines.push("- PullRite SuperGlide built for super short beds with capture plate");
+      } else {
+        lines.push("- Confirm bed size to recommend a hitch lane");
+      }
+
+      const notes = [];
+      if (prepVal === "unknown") notes.push("Confirm factory prep or rails with a bed photo");
+      if (rotatingPinBox) notes.push("Rotating pin box: fixed hitch only, confirm compatibility");
+      if (goosePref && !gooseApproved) {
+        notes.push("Gooseneck requested: approval required before quoting");
+      }
+      if (bedCat === "supershort") notes.push("Clearance verification required");
+
+      if (notes.length) {
+        lines.push("");
+        lines.push("Notes");
+        notes.forEach(note => lines.push(`- ${note}`));
+      }
+
+      return lines.join("\n").trim();
+    }
+
+    function downloadTextFile(filename, text) {
+      const blob = new Blob([text], { type: "text/plain;charset=utf-8" });
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      URL.revokeObjectURL(a.href);
+      a.remove();
+    }
+
+    function refreshSummaryIfBuilt() {
+      if ($("summaryOut").textContent.trim()) {
+        $("summaryOut").textContent = buildRecommendationText();
+      }
+    }
+
+    function resetAll() {
+      $("make").value = "";
+      updateModels();
+      $("model").value = "";
+      $("year").value = "";
+      updateEngines();
+      $("truckClass").value = "unknown";
+      updateBedOptions();
+
+      $("factoryPrep").value = "unknown";
+      updatePrepBrandVisibility();
+
+      $("tonneau").value = "none";
+      $("toolbox").value = "none";
+      $("cap").value = "no";
+      $("fuelTank").value = "no";
+      $("bedLiner").value = "none";
+      $("otherBed").value = "";
+      updateBedWarnings();
+
+      $("gvwr").value = "";
+      $("pinWeight").value = "";
+      $("frontCap").value = "unknown";
+      $("rotatingPinBox").value = "unknown";
+      $("gooseneckPref").value = "no";
+      $("gooseneckApprovalWrap").classList.add("hidden");
+      $("gooseneckApproval").value = "unknown";
+
+      $("summaryOut").textContent = "";
+      $("copyMsg").textContent = "";
+      showStep(1);
+      updateSidebar();
+      validateStep1();
+    }
+
+    // Init selects
+    setOptions($("make"), data.makes, "Choose make");
+    $("make").value = "";
+    updateModels();
+    updateEngines();
+    populateYears();
+    updateBedOptions();
+    updatePrepBrandVisibility();
+    updateBedWarnings();
+    updateSidebar();
+
+    // Events
+    $("make").addEventListener("change", () => { updateModels(); updateEngines(); validateStep1(); });
+    $("model").addEventListener("change", () => { updateClassAuto(); updateEngines(); updateSidebar(); validateStep1(); });
+    $("year").addEventListener("change", () => { updateEngines(); updateBedOptions(); updateSidebar(); validateStep1(); });
+
+    function validateStep1() {
+      const make = $("make").value;
+      const model = $("model").value;
+      const year = $("year").value;
+      const nextBtn = $("to2");
+      nextBtn.disabled = !(make && model && year);
+    }
+
+    $("bedSize").addEventListener("change", () => { applySuperShortPrepRule(); });
+    $("factoryPrep").addEventListener("change", () => { applySuperShortPrepRule(); updatePrepBrandVisibility(); });
+
+    $("tonneau").addEventListener("change", updateBedWarnings);
+    $("toolbox").addEventListener("change", updateBedWarnings);
+    $("cap").addEventListener("change", updateBedWarnings);
+    $("fuelTank").addEventListener("change", updateBedWarnings);
+    $("bedLiner").addEventListener("change", updateBedWarnings);
+    $("otherBed").addEventListener("input", updateBedWarnings);
+    $("make").addEventListener("change", updateSidebar);
+    $("year").addEventListener("change", updateSidebar);
+    $("bedSize").addEventListener("change", updateSidebar);
+    $("factoryPrep").addEventListener("change", updateSidebar);
+    $("engine").addEventListener("change", updateSidebar);
+
+    $("gooseneckPref").addEventListener("change", () => {
+      const v = $("gooseneckPref").value;
+      $("gooseneckApprovalWrap").classList.toggle("hidden", v !== "yes");
+      if (v !== "yes") $("gooseneckApproval").value = "unknown";
+      refreshSummaryIfBuilt();
+    });
+    $("gooseneckApproval").addEventListener("change", refreshSummaryIfBuilt);
+    $("rotatingPinBox").addEventListener("change", refreshSummaryIfBuilt);
+
+    // Navigation
+    $("to2").addEventListener("click", () => showStep(2));
+    $("to3").addEventListener("click", () => showStep(3));
+    $("to4").addEventListener("click", () => showStep(4));
+    $("back1").addEventListener("click", () => showStep(1));
+    $("back2").addEventListener("click", () => showStep(2));
+    $("back3").addEventListener("click", () => showStep(3));
+
+    // Resets
+    $("reset1").addEventListener("click", resetAll);
+    $("reset2").addEventListener("click", resetAll);
+    $("reset3").addEventListener("click", resetAll);
+    $("reset4").addEventListener("click", resetAll);
+
+    // Summary
+    $("buildSummary").addEventListener("click", () => {
+      const text = buildRecommendationText();
+      $("summaryOut").textContent = text;
+      $("copyMsg").textContent = "";
+    });
+
+    $("copySummary").addEventListener("click", async () => {
+      const text = $("summaryOut").textContent.trim();
+      if (!text) { $("copyMsg").textContent = "Build the summary first."; return; }
+      try {
+        await navigator.clipboard.writeText(text);
+        $("copyMsg").textContent = "Copied.";
+      } catch (e) {
+        $("copyMsg").textContent = "Copy failed. Select the text and copy manually.";
+      }
+    });
+
+    $("downloadTxt").addEventListener("click", () => {
+      const text = $("summaryOut").textContent.trim();
+      if (!text) { $("copyMsg").textContent = "Build the summary first."; return; }
+      const stamp = new Date().toISOString().slice(0, 10);
+      downloadTextFile(`fifth-wheel-hitch-summary-${stamp}.txt`, text);
+    });
+
+    // Start state
+    showStep(1);
+    validateStep1();
+
+    // Image modal for progress icons
+    const imageModal = $("imageModal");
+    const imageModalImg = $("imageModalImg");
+    const imageModalClose = $("imageModalClose");
+
+    function openImageModal(src, alt) {
+      imageModalImg.src = src;
+      imageModalImg.alt = alt || "Icon preview";
+      imageModal.classList.remove("hidden");
+    }
+
+    function closeImageModal() {
+      imageModal.classList.add("hidden");
+      imageModalImg.src = "";
+      imageModalImg.alt = "";
+    }
+
+    document.querySelectorAll(".zoomable").forEach((img) => {
+      img.addEventListener("click", () => openImageModal(img.src, img.alt));
+    });
+
+    imageModal.addEventListener("click", (e) => {
+      if (e.target === imageModal) closeImageModal();
+    });
+    imageModalClose.addEventListener("click", closeImageModal);
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && !imageModal.classList.contains("hidden")) {
+        closeImageModal();
+      }
+    });
+  </script>
+</body>
+
+</html>
